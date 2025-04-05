@@ -39,22 +39,22 @@ head(ixodes_data)
 
 
 ## Dataset Details
-| Column Name               | Description                                                   |
-|---------------------------|---------------------------------------------------------------|
-| Tick_ID                   | Unique identifier for each tick                               |
-| Trial_Number              | Trial iteration number                                        |
-| Time                      | Time interval during the trial (every 30 seconds)             |
-| Vertical_or_no            | Whether tick moved vertically (1 = yes, 0 = no)               |
-| Movement_Count            | Number of observed movements during the trial                 |
-| Percent_Activity          | Percentage of time the tick was active during the trial       |
-| Population                | Geographic origin of the tick (e.g., Northern California)     |
-| Engorgement_Level         | Blood-meal feeding state; ranked level of engorgement (1 to 3)|
-| Vertical_distance_gross   | Total vertical movement documented during the trial           |
-| X_sum                     | Total x-axis movements documented during the trial            |
-| Y_sum                     | Total y-axis movements documented during the trial            |
-| Z_sum                     | Total z-axis movements documented during the trial            |
-| Horizontal_distance       | Distance traveled on the x & z planes during the trial        |
-
+| Column Name               | Description                                                     |
+|---------------------------|---------------------------------------------------------------  |
+| Tick_ID                   | Unique identifier for each tick                                 |
+| Trial_Number              | Trial iteration number                                          |
+| Time                      | Time interval during the trial (every 30 seconds)               |
+| Vertical_or_no            | Whether tick moved vertically (1 = yes, 0 = no)                 |
+| Movement_Count            | Number of observed movements during the trial                   |
+| Percent_Activity          | Percentage of time the tick was active during the trial         |
+| Population                | Geographic origin of the tick (e.g., Northern California)       |
+| Engorgement_Level         | Blood-meal feeding state; ranked level of engorgement (1 to 3)  |
+| Vertical_distance_gross   | Total vertical movement documented during the trial             |
+| X_sum                     | Total x-axis movements documented during the trial              |
+| Y_sum                     | Total y-axis movements documented during the trial              |
+| Z_sum                     | Total z-axis movements documented during the trial              |
+| Horizontal_distance       | Distance traveled on the x & z planes during the trial          |
+| Room                      | Location where experiment was conducted:U-Upstairs; D-Downstairs| 
 ## Rationale
 
 This dataset was created to evaluate variation in tick behavior that could influence host encounters and pathogen transmission. Understanding behavioral differences by population origin and geographical differences helps inform ecological and public health research related to Lyme disease dynamics in California.
