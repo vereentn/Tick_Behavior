@@ -1,0 +1,14 @@
+### Introduction
+Vector behavior is a key factor in disease transmission, influencing pathogen spread among humans, wildlife, and domestic animals. Various arthropod vectors, such as mosquitoes, fleas, and tsetse flies, exhibit host-seeking behaviors that shape disease dynamics (Benelli, 2020; Onen et al., 2023; Rogers & Bates, 2007; Pipová et al., 2023). Vector-borne diseases account for over 17% of infectious diseases, leading to more than 700,000 deaths annually (World Health Organization, 2020; Sutherust, 2004; Chala & Hamde, 2021). Climate change, land-use alterations, and human activity are driving the increasing prevalence of these diseases by disrupting ecological systems and increasing host-vector interactions (Ellwanger et al., 2020; Swei et al., 2020). While the behaviors of many vectors have been documented (Azad et al., 1997; Gleave et al., 2016; Bruno et al., 2019; Javed et al., 2021; Stanczyk et al., 2017; Wei Xiang et al.), nymphal tick questing behavior, particularly in Ixodes pacificus, remains less understood, despite its implications for disease transmission.
+
+Ixodes pacificus, the primary vector of Lyme disease (LD) in the western U.S. (CDC, 2020), plays a crucial role in pathogen transmission, with over 400,000 new cases estimated annually in the U.S. (Garira & Chirove, 2019; CDC, 2024). While Ixodes scapularis nymphs in the eastern U.S. exhibit well-documented host-seeking behaviors, I. pacificus questing activity is more variable and less frequently observed, particularly in Southern California (Lane & Kjemtrup, 2016; Lane et al., 2013). Geographic, genetic, and environmental factors likely contribute to these behavioral differences, influencing LD incidence across regions (Arsnoe et al., 2019). Additionally, host interactions, such as those with Western fence lizards (Sceloporus occidentalis), may shape tick activity, as lizard-associated tick abundances fluctuate seasonally (Lane & Loye, 1989). These variations in questing behavior highlight the need for further research to understand the environmental and ecological drivers of tick activity, which could aid in disease prevention and risk assessment (Tomkins et al., 2014).
+Our goals are to: 1) Does geographic origin affect I. pacificus questing behavior? I hypothesize that questing behavior will differ based on geographic origin during observation trials. Specific Aim 1: Determine whether geographic origin affects questing behavior due to different environmental conditions in these regions
+
+```{r}
+# Load dataset
+behavior_data <- read.csv("Master's data - results_4.1.25.csv")
+
+# View first few rows
+head(behavior_data)
+
+```
