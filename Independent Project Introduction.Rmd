@@ -15,9 +15,9 @@ Our goals are to: 1) Does geographic origin affect I. pacificus questing behavio
 
 ```{r}
 # Load dataset
-ixodes_data <- read.csv("Master's data - results_4.1.25.csv")
+behavior_data <- read.csv("Master's data - results_4.1.25.csv")
 
 # View first few rows
-head(ixodes_data)
+head(behavior_data)
 
 ```
