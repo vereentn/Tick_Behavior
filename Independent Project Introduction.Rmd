@@ -14,7 +14,8 @@ Ixodes pacificus, the primary vector of Lyme disease (LD) in the western U.S. (C
 Our goals are to: 1) Does geographic origin affect I. pacificus questing behavior? I hypothesize that questing behavior will differ based on geographic origin during observation trials. Specific Aim 1: Determine whether geographic origin affects questing behavior due to different environmental conditions in these regions
 
 ```{r}
-# Load dataset
+# Load dataset -test
+#test #2
 behavior_data <- read.csv("Master's data - results_4.1.25.csv")
 
 # View first few rows
