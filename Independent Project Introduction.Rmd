@@ -16,9 +16,154 @@ Our goals are to: 1) Does geographic origin affect I. pacificus questing behavio
 ```{r}
 # Load dataset -test
 #test #2
+install.packages("tidyverse")
+library(tidyverse)
 behavior_data <- read.csv("Master's data - results_4.1.25.csv")
+behavior_data$Engorgement <- as.factor(behavior_data$Engorgement)
 
 # View first few rows
-head(behavior_data)
+view(behavior_data)
 
 ```
+
+
+### Aim 1
+
+Specific Aim 1: Determine whether geographic origin affects questing behavior due to different environmental conditions in these regions
+
+### Hypotheses
+
+Null Hypothesis: Geographic origin has no effect on tick questing behavior, regardless of the environmental conditions associated with different regions.
+
+Alternative Hypothesis: Geographic origin affects tick questing behavior, likely due to differences in environmental conditions between regions.
+
+
+### Statistical approach
+
+Behavioral trials were conducted in two different laboratory rooms, each with distinct environmental conditions. The first room, maintained at approximately 17.46°C and 70.18% relative humidity (hereafter referred to as the “17.46°C room”), was located in the San Francisco Animal Care Facility and housed four mus musculus (C3H) mice as part of another experiment. Initial trials were conducted in this space, which offered more consistent temperature and humidity control. For this project, I will be reporting on data from the 17.46°C room.
+
+All statistical analyses were conducted in R (version 4.4.1) using RStudio, with key packages including tidyverse, glmmTMB, performance, and ggplot2 for data cleaning, visualization, and modeling. Questing behavior metrics were analyzed using Generalized Linear Mixed Models (GLMMs) to account for non-normal distributions and repeated measures. Total distance, horizontal distance, and vertical gross distance were modeled using GLMMs with a Tweedie distribution to account for overdispersion and the continuous nature of the distance data. Percent activity, a proportion-based metric with many zero values, was analyzed using a negative binomial GLMM with a zero-inflated component. For the sake of this project, I will be reporting on the total distance traveled behavioral metric. Fixed effects included tick population of origin and engorgement level across all models. Tick ID and trial number were included as random effects to account for repeated observations and individual variation. Model performance was evaluated using Akaike Information Criterion (AIC), with lower AIC values guiding model selection. 
+
+
+# Stats and Visuals
+```{r}
+install.packages("ggplot2")
+install.packages("ggsignif")
+library(ggplot2)
+library(ggsignif)
+behavior_data$horizontal_dist_cm <- behavior_data$horizontal_dist * 0.635
+behavior_data$vertical_dist_gross_cm <- behavior_data$vertical_dist_gross * 0.635
+behavior_data$total_dist_cm <- behavior_data$total_dist * 0.635
+behavior_data_u <- subset(behavior_data, Room == "U") # U refers to 17.46 room
+
+```
+
+
+```{r}
+#total distance (u)
+model_total<- glmmTMB(
+  total_dist_cm ~ Population * Engorgement + (1|Tick_ID) + (1|Trial),
+  family = tweedie(link = "log"),
+  data = behavior_data_u
+)
+
+summary(model_total)
+
+model_total1<- glmmTMB(
+  total_dist_cm ~ Population + Engorgement + (1|Tick_ID) + (1|Trial),
+  family = tweedie(link = "log"),
+  data = behavior_data_u
+)
+
+summary(model_total1)
+
+AIC(model_total, model_total1)
+#model_total has a lower AIC score, so we used that model (model_total)
+
+#conducted an emmeans to see any potential additional interactions
+emmeans(model_total, pairwise ~ Population * Engorgement, adjust = "bonferroni")
+
+```
+
+```{r}
+behavior_data_u$Pop_Engorgement <- paste(behavior_data_u$Population, behavior_data_u$Engorgement, sep = "\n")
+
+# Okabe-Ito palette for two groups
+okabe_ito <- c("Northern California" = "#E69F00",  # Orange
+               "Southern California" = "#56B4E9")  # Sky Blue
+
+#total distance traveled by population
+ggplot(behavior_data_u, aes(x = as.factor(Room), y = total_dist_cm, fill = Population)) +
+  geom_boxplot(outlier.shape = NA, width = 0.6, position = position_dodge(0.75)) +
+  stat_summary(fun = mean, geom = "point", shape = 20, size = 3, color = "black",
+               position = position_dodge(0.75)) +
+  labs(
+    x = "Room",
+    y = "Total Distance (cm)",
+    fill = "Population"
+  ) +
+  theme_minimal() +
+  scale_fill_manual(values = okabe_ito) +
+  geom_signif(
+    comparisons = list(c("U", "U")),  # You may want to check this comparison
+    annotations = "p = 0.032*",
+    y_position = max(behavior_data_u$total_dist_cm) * 0.8,
+    tip_length = 0.08,
+    textsize = 4
+  )+
+  theme(
+  plot.title = element_text(face = "bold", hjust = 0.5, size = 18),
+  axis.title = element_text(face = "bold", size = 14),
+  axis.text = element_text(size = 12),
+  axis.text.x = element_text(angle = 45, hjust = 1),
+  legend.title = element_text(face = "bold", size = 13),
+  legend.text = element_text(size = 11)
+)
+
+```
+
+```{r}
+#total distance traveled by population and engorgement
+```{r}
+# Okabe-Ito for engorgement levels (three distinguishable colors)
+engorgement_colors <- c("1" = "#E69F00",  # Orange (Unfed)
+                        "2" = "#56B4E9",  # Sky Blue (Partially Engorged)
+                        "3" = "#009E73")  # Bluish-Green (Fully Engorged)
+
+ggplot(data_u, aes(x = Pop_Engorgement, y = total_dist_cm, fill = as.factor(Engorgement))) +
+  geom_boxplot(outlier.shape = NA, width = 0.6) +
+  stat_summary(fun = mean, geom = "point", shape = 20, size = 3, color = "black") +
+  labs(
+    x = "Population",
+    y = "Total Distance (cm)",
+    fill = "Engorgement Level"
+  ) +
+  scale_fill_manual(
+    values = engorgement_colors,
+    labels = c("1" = "Unfed", "2" = "Partially Engorged", "3" = "Fully Engorged")
+  ) +
+  theme_minimal() +
+  geom_signif(
+    comparisons = list(
+      c("Northern California\n1", "Southern California\n1"),
+      c("Southern California\n1", "Southern California\n3")
+    ),
+    annotations = c("p=0.048", "p=0.020"),
+    y_position = c(25, 35),
+    tip_length = 0.02,
+    textsize = 3.5,
+    map_signif_level = FALSE
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 16),
+    axis.title = element_text(face = "bold", size = 14),
+    axis.text = element_text(size = 10),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.title = element_text(face = "bold"),
+    legend.position = "right"
+  )
+
+```
+
+```
+
