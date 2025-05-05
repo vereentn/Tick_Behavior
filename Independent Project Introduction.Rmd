@@ -16,7 +16,6 @@ Our goals are to: 1) Does geographic origin affect I. pacificus questing behavio
 ```{r}
 # Load dataset -test
 #test #2
-install.packages("tidyverse")
 library(tidyverse)
 behavior_data <- read.csv("Master's data - results_4.1.25.csv")
 behavior_data$Engorgement <- as.factor(behavior_data$Engorgement)
@@ -47,10 +46,13 @@ All statistical analyses were conducted in R (version 4.4.1) using RStudio, with
 
 # Stats and Visuals
 ```{r}
-install.packages("ggplot2")
-install.packages("ggsignif")
+#install these packages if you haven't :)
+#install.packages("ggplot2")
+#install.packages("ggsignif")
 library(ggplot2)
 library(ggsignif)
+library(glmmTMB)
+library(emmeans)
 behavior_data$horizontal_dist_cm <- behavior_data$horizontal_dist * 0.635
 behavior_data$vertical_dist_gross_cm <- behavior_data$vertical_dist_gross * 0.635
 behavior_data$total_dist_cm <- behavior_data$total_dist * 0.635
@@ -124,13 +126,12 @@ ggplot(behavior_data_u, aes(x = as.factor(Room), y = total_dist_cm, fill = Popul
 
 ```{r}
 #total distance traveled by population and engorgement
-```{r}
 # Okabe-Ito for engorgement levels (three distinguishable colors)
 engorgement_colors <- c("1" = "#E69F00",  # Orange (Unfed)
                         "2" = "#56B4E9",  # Sky Blue (Partially Engorged)
                         "3" = "#009E73")  # Bluish-Green (Fully Engorged)
 
-ggplot(data_u, aes(x = Pop_Engorgement, y = total_dist_cm, fill = as.factor(Engorgement))) +
+ggplot(behavior_data_u, aes(x = Pop_Engorgement, y = total_dist_cm, fill = as.factor(Engorgement))) +
   geom_boxplot(outlier.shape = NA, width = 0.6) +
   stat_summary(fun = mean, geom = "point", shape = 20, size = 3, color = "black") +
   labs(
