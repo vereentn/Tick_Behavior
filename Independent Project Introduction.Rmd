@@ -17,11 +17,11 @@ Our goals are to: 1) Does geographic origin affect I. pacificus questing behavio
 # Load dataset -test
 #test #2
 library(tidyverse)
-behavior_data <- read.csv("Master's data - results_4.1.25.csv")
+behavior_data <- read.csv("Data/Master's data - results_4.1.25.csv")
 behavior_data$Engorgement <- as.factor(behavior_data$Engorgement)
 
 # View first few rows
-view(behavior_data)
+#view(behavior_data)
 
 ```
 
