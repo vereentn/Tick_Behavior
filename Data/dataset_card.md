@@ -29,11 +29,10 @@ Bioinformatics: Raw movement and position data were used to calculate activity m
 ## Data Instances
 
 This dataset can be used to analyze tick questing behavior in relation to geography and environmental conditions. It may inform public health strategies for vector-borne disease prevention.
-
-| Population         | Room| Engorgement| Tick_ID     | Trial| X_sum| Y_sum| Z_sum| horizontal_dist| vertical_gross_dist| max_vert| total_dist| movement_count| percent_activity| vertical_or_no|  |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|Northern California | U   |  1         | 24FL_0.001  |  1   | 4    |  2   |   0 |    2.000000     | 0.0000             |   0     |   2.00000 |     2         |   18.181818     |   0           |
                   
-
+| Population          | Room | Engorgement | Tick_ID     | Trial | X_sum | Y_sum | Z_sum | horizontal_dist | vertical_gross_dist | max_vert | total_dist | movement_count | percent_activity | vertical_or_no |
+|---------------------|------|-------------|-------------|-------|--------|--------|--------|------------------|----------------------|----------|-------------|-----------------|------------------|----------------|
+| Northern California | U    | 1           | 24FL_0.001  | 1     | 4      | 2      | 0      | 2.000000         | 0.0000               | 0        | 2.00000     | 2               | 18.181818        | 0              |
 
 
 ## Dataset Details
