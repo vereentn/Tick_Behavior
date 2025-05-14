@@ -39,6 +39,9 @@ https://github.com/vereentn/Tick_Behavior/tree/main
 library(ggplot2)
 library(ggsignif)
 library(glmmTMB)
+library(readr)
+Master_s_data_results_4_1_25 <- read_csv("Master's data - results_4.1.25.csv")
+#View(Master_s_data_results_4_1_25)
 data <- Master_s_data_results_4_1_25
 data$Engorgement <- as.factor(data$Engorgement)
 data$horizontal_dist_cm <- data$horizontal_dist * 0.635
