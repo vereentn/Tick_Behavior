@@ -22,8 +22,7 @@ Description: This dataset contains observations of questing behavior in Ixodes p
 
 Source: Data collected from controlled laboratory trials and field sampling in California.
 
-Collection Process: Each tick was observed over a 5-minute trial, with movement recorded at 30-second intervals. The dataset includes multiple trials per tick and considers factors such as engorgement level, population origin, and infection status.
-
+Collection Process: Each tick was observed over a 5-minute trial, with movement recorded at 30-second intervals. The dataset includes multiple trials per tick and considers factors such as engorgement level and population origin.
 Bioinformatics: Raw movement and position data were used to calculate activity metrics, and data were organized into a tidy structure using R.
 
 ## Data Instances
